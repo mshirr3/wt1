@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head><title>My Groups</title></head>
+<body>
+  <h1>Your Groups</h1>
+
+  <% groups.forEach(group => { %>
+    <div style="margin-bottom: 2rem;">
+      <h2>
+        <img src="<%= group.avatar_url || '' %>" width="30" />
+        <a href="<%= group.web_url %>"><%= group.name %></a>
+        (<%= group.path %>)
+      </h2>
+
+      <ul>
+        <% group.projects.forEach(proj => { %>
+          <li>
+            <img src="<%= proj.avatar_url || '' %>" width="20" />
+            <a href="<%= proj.web_url %>"><%= proj.name %></a> (<%= proj.path %>)<br/>
+            <% if (proj.latestCommit) { %>
+              Last commit: <%= proj.latestCommit.date %> by
+              <%= proj.latestCommit.authorName %>
+              <% if (proj.latestCommit.authorAvatar) { %>
+                <img src="<%= proj.latestCommit.authorAvatar %>" width="20"/>
+              <% } %>
+            <% } else { %>
+              No commits found.
+            <% } %>
+          </li>
+        <% }) %>
+      </ul>
+
+      <% if (group.hasMoreProjects) { %>
+        <p>...and more projects exist in this group.</p>
+      <% } %>
+    </div>
+  <% }) %>
+
+  <% if (hasMoreGroups) { %>
+    <p>...and more groups exist.</p>
+  <% } %>
+</body>
+</html>
