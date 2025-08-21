@@ -43,7 +43,7 @@ export const callback = async (req, res) => {
         // save token in session for later gitlab api calls
         req.session.accessToken = tokenData.access_token
 
-        res.send(`Access token received and stored in session: ${tokenData.access_token}`)
+        res.redirect('/profile')
     } catch (error) {
         console.error('Token exchange failed', error)
         res.status(500).send('Failed to exchange code for token')

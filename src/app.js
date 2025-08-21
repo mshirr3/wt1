@@ -1,6 +1,7 @@
 import express from 'express'
 import session from 'express-session'
-import router from './routes/authRoutes.js'
+import authRoutes from './routes/authRoutes.js'
+import userRoutes from './routes/userRoutes.js'
 import dotenv from 'dotenv'
 import logger from 'morgan'
 import { dirname, join } from 'node:path'
@@ -30,9 +31,9 @@ app.use(logger('dev'))
 app.set('view engine', 'ejs')
 app.set('views', join(directoryFullName, 'views'))
 
-
 // routes
-app.use("/", router)
+app.use("/", authRoutes)
+app.use("/", userRoutes)
 
 app.listen(3000, () => {
   console.log("App running at http://localhost:3000")
