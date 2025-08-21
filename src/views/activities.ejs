@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head><title>GitLab Activities</title></head>
+<body>
+  <h1>Last 101 Activities</h1>
+  <ul>
+    <% activities.forEach(act => { %>
+      <li><%= act.action_name %> in <%= act.project_id %> at <%= act.created_at %></li>
+    <% }) %>
+  </ul>
+</body>
+</html>
